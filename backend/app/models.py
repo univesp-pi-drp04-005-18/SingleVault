@@ -24,12 +24,14 @@ class UserLogin(BaseModel):
 
 class Credential(BaseModel):
     name: str
+    owner: str
     site: Optional[str] = None 
     username: Optional[str] = None 
     password: Optional[str] = None
     token: Optional[str] = None
     api_key: Optional[str] = None
     private_key: Optional[str] = None
+    public_key: Optional[str] = None
     text: Optional[str] = None 
 
     def encrypt_string(self, string: str) -> str:
@@ -48,12 +50,17 @@ class Credential(BaseModel):
 
     def encrypt_fields(self):
         """
-        Criptografa os campos de senha, token, chave de API e chave privada com os métodos apropriados.
+        Criptografa os campos de senha, usuario, token, chave de API e chave privada com os métodos apropriados.
         """
+        if self.site:
+            self.site = self.encrypt_string(self.site)
+
+        if self.username:
+            self.username = self.encrypt_string(self.username)
         
         if self.password:
             self.password = self.encrypt_string(self.password)
-        
+                      
         if self.token:
             self.token = self.encrypt_string(self.token)
 
@@ -62,17 +69,26 @@ class Credential(BaseModel):
 
         if self.private_key:
             self.private_key = self.encrypt_string(self.private_key)
+
+        if self.public_key:
+            self.public_key = self.encrypt_string(self.public_key)
         
         if self.text:
             self.text = self.encrypt_string(self.text)
 
     def decrypt_fields(self):
         """
-        Descriptografa os campos de senha, token, chave de API e chave privada se necessário.
+        Descriptografa os campos de senha, usuario, token, chave de API e chave privada se necessário.
         """
+        if self.site:
+            self.site = self.decrypt_string(self.site)
+
+        if self.username:
+            self.username = self.decrypt_string(self.username)
+        
         if self.password:
             self.password = self.decrypt_string(self.password)
-
+        
         if self.token:
             self.token = self.decrypt_string(self.token)
             
@@ -81,6 +97,9 @@ class Credential(BaseModel):
 
         if self.private_key:
             self.private_key = self.decrypt_string(self.private_key)
+
+        if self.public_key:
+            self.public_key = self.decrypt_string(self.public_key)
             
         if self.text:
             self.text = self.decrypt_string(self.text)
