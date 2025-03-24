@@ -99,7 +99,7 @@ const CredenciaisList = () => {
           <FaCopy />
         </button>
         <button onClick={() => toggleReveal(fieldKey)} style={{ marginLeft: '10px' }}>
-          {revealedCredentials[fieldKey] ? <FaEyeSlash /> : <FaEye />}
+          {revealedCredentials[fieldKey] ? <FaEye /> : <FaEyeSlash />}
         </button>
       </div>
     );

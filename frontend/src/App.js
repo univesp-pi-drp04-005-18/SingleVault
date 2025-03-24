@@ -7,8 +7,7 @@ import axios from 'axios';
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
-  const [credentials, setCredentials] = useState([]); 
-
+  const [credentials, setCredentials] = useState([]);  
 
   const fetchCredentials = async () => {
     try {
@@ -22,9 +21,9 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    if (token) fetchCredentials();  // Buscar credenciais quando o token for válido
+    if (token) fetchCredentials(); 
   }, [token]);
-  
+
   return (
     <BrowserRouter>
       <div>
