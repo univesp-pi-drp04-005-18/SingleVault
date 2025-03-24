@@ -9,7 +9,7 @@ router = APIRouter()
 def create_credential(credential: Credential, current_user: str = Depends(get_current_user)):
     """Cria uma credencial associada ao usuário logado."""
     credential.owner = current_user
-    credential.encrypt_fields()
+    credential.encrypt_fields()  # Supondo que você tenha um método para encriptar campos sensíveis
     creds_collection.insert_one(credential.dict())
     return {"message": "Credencial salva com sucesso!"}
 
@@ -19,7 +19,7 @@ def list_credentials(current_user: str = Depends(get_current_user)):
     credentials = list(creds_collection.find({"owner": current_user}, {"_id": 0}))
     for cred in credentials:
         cred_obj = Credential(**cred)
-        cred_obj.decrypt_fields()
+        cred_obj.decrypt_fields()  # Supondo que você tenha um método para descriptografar os campos
         cred.update(cred_obj.dict())
     return credentials
 
@@ -31,7 +31,7 @@ def update_credential(credential_name: str, updated_credential: Credential, curr
         raise HTTPException(status_code=404, detail="Credencial não encontrada ou não autorizada")
     
     updated_credential.owner = current_user
-    updated_credential.encrypt_fields()
+    updated_credential.encrypt_fields()  # Encriptar novamente antes de atualizar
     creds_collection.update_one({"name": credential_name, "owner": current_user}, {"$set": updated_credential.dict()})
     return {"message": "Credencial atualizada com sucesso!"}
 

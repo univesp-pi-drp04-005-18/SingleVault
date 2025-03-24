@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Estilos para a lista de credenciais */
+.credential-list {
+  list-style: none;
+  padding: 0;
+}
+
+.credential-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.credential-name {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  font-weight: bold;
+  color: #333;
+}
+
+.credential-name i {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.credential-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.credential-details p {
+  margin: 5px 0;
+}
+
+/* Estilos para os ícones de cadeado */
+.credential-name i {
+  font-size: 18px;
+  color: #007bff;
+}
+
+.credential-name i.lock {
+  color: #ff0000; /* Cadeado fechado */
+}
+
+.credential-name i.unlock {
+  color: #00b300; /* Cadeado aberto */
+}
+
+/* Estilos para o botão de revelar */
+button {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button i {
+  color: #007bff;
+  font-size: 16px;
+}
+
+/* Estilos para esconder as credenciais */
+.hidden-value {
+  display: inline-block;
+  width: 200px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Estilos para a credencial visível */
+.revealed-value {
+  word-wrap: break-word;
+}
