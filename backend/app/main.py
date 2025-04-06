@@ -8,10 +8,10 @@ app = FastAPI(title='Password Manager')
 # Adicionando suporte ao CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite requisições de qualquer origem. Você pode restringir aqui se necessário
+    allow_origins=["*"],  
     allow_credentials=True,
-    allow_methods=["*"],  # Permite qualquer método HTTP
-    allow_headers=["*"],  # Permite qualquer cabeçalho
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Registrando as rotas

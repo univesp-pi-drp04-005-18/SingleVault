@@ -16,6 +16,10 @@ class UserCreate(BaseModel):
     username: str
     password: str
 
+class UserUpdate(BaseModel):
+    username: str | None = None
+    password: str | None = None
+
 # Classe de login de usuário
 class UserLogin(BaseModel):
     username: str
