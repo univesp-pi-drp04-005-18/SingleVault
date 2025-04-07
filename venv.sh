@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Changing to pi-2025 Python env"
+echo "Changing to univesp Python env"
 
-source pi-2025/bin/activate
+source univesp/bin/activate

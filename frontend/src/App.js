@@ -1,42 +1,41 @@
-import React, { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';  
-import Login from './login';
-import Register from './register';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Auth from './Auth';
 import Credentials from './credentials';
 import axios from 'axios';
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
-  const [credentials, setCredentials] = useState([]);  
+  const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+  const [credentials, setCredentials] = useState([]);
 
-  const fetchCredentials = async () => {
-    try {
-      const response = await axios.get('/api/credentials', { 
-        headers: { Authorization: `Bearer ${token}` } 
-      });
-      setCredentials(response.data);  
-    } catch (error) {
-      console.error('Erro ao buscar credenciais:', error);
+  useEffect(() => {
+    const fetchCredentials = async () => {
+      try {
+        const response = await axios.get('/api/credentials', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCredentials(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar credenciais:', error);
+      }
+    };
+
+    if (token) {
+      fetchCredentials();
     }
-  };
-
-  React.useEffect(() => {
-    if (token) fetchCredentials(); 
   }, [token]);
+
+  
 
   return (
     <BrowserRouter>
       <div>
-        <h1>Password Manager</h1>
         {token ? (
           <>
-            <Credentials credentials={credentials} />  {/* Passando as credenciais para o componente */}
+            <Credentials credentials={credentials} />
           </>
         ) : (
-          <>
-            <Login setToken={setToken} />
-            <Register />
-          </>
+          <Auth setToken={setToken} />
         )}
       </div>
     </BrowserRouter>

@@ -16,6 +16,7 @@ class UserCreate(BaseModel):
     username: str
     password: str
 
+# Classe atualização de usuario
 class UserUpdate(BaseModel):
     username: str | None = None
     password: str | None = None
@@ -25,6 +26,9 @@ class UserLogin(BaseModel):
     username: str
     password: str
 
+# Classe delete de usuario
+class UserDelete(BaseModel):
+    password: str
 
 class Credential(BaseModel):
     name: str
