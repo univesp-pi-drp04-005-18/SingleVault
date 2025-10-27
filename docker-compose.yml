@@ -7,7 +7,7 @@ services:
       - "8000:8000"
     environment:
       # For MongoDB Atlas, replace with your connection string
-      - MONGODB_URI=mongodb+srv://single-vault:eoq1cQwr1yVuIzjm@single-vault.n4hzo2g.mongodb.net/?appName=single-vault
+      - MONGODB_URI=mongodb+srv://single-vault:xxxxxxxxxxxxx@single-vault.n4hzo2g.mongodb.net/?appName=single-vault
 
 
   frontend:
