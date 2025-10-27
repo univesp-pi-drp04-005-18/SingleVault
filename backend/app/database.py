@@ -5,7 +5,7 @@ import os
 #DB_PASSWORD = os.getenv("DB_PASSWORD")
 #MONGO_URI = f"mongodb://{DB_USER}:{DB_PASSWORD}@localhost:27017/{DB_NAME}"
 
-MONGO_URI = "mongodb://localhost:27017"
+MONGO_URI = os.getenv("MONGODB_URI")
 DB_NAME = "credenciais_db"
 
 client = MongoClient(MONGO_URI)

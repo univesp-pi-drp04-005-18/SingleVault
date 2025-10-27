@@ -31,4 +31,3 @@ const Auth = ({ setToken }) => {
   };
 
 export default Auth;
-
