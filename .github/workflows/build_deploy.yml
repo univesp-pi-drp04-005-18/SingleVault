@@ -1,0 +1,56 @@
+name: Build and Deploy SoftDesign App
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+  workflow_dispatch:
+
+env:
+
+  APP_SECRET_KEY: ${{ secrets.APP_SECRET_KEY }}
+
+  MONGODB_USER: ${{ secrets.MONGODB_USER }}
+  MONGODB_PASS: ${{ secrets.MONGODB_PASS }}
+  MONGODB_HOST: ${{ secrets.MONGODB_HOST }}
+
+  DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}  
+  REPOSITORY: "jozneto"
+
+
+
+jobs:
+
+  build-backend:
+
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKERFILE_PATH: "./backend/Dockerfile"
+      IMAGE_NAME: "svault-backend"
+      IMAGE_TAG: "1.0.0"
+
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v3
+
+    - name: Build
+      run: bash scripts/docker_build_push.sh
+
+  build-frontend:
+
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKERFILE_PATH: "./frontend/Dockerfile"
+      IMAGE_NAME: "svault-frontend"
+      IMAGE_TAG: "1.0.0"
+
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v3
+
+    - name: Build
+      run: bash scripts/docker_build_push.sh   

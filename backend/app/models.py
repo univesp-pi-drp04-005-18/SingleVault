@@ -1,12 +1,11 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 import datetime
-import jwt
+import jwt, os
 from cryptography.fernet import Fernet
 from passlib.context import CryptContext
 
-#SECRET_KEY = os.getenv("SECRET_KEY")
-SECRET_KEY = "LAqRl9MnL8XtK6oioLumYLIiI4Ct6C08uLKrH0QFqx0="
+APP_SECRET_KEY = os.getenv("APP_SECRET_KEY")
 ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -46,14 +45,14 @@ class Credential(BaseModel):
         """
         Criptografa uma string usando Fernet (para senha, chave de API e chave privada).
         """
-        cipher = Fernet(SECRET_KEY)
+        cipher = Fernet(APP_SECRET_KEY)
         return cipher.encrypt(string.encode()).decode()
 
     def decrypt_string(self, string: str) -> str:
         """
         Descriptografa uma string usando Fernet (para senha, chave de API e chave privada).
         """
-        cipher = Fernet(SECRET_KEY)
+        cipher = Fernet(APP_SECRET_KEY)
         return cipher.decrypt(string.encode()).decode()
 
     def encrypt_fields(self):
