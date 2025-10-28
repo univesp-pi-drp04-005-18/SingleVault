@@ -1,4 +1,4 @@
-name: Build and Deploy SoftDesign App
+name: Build and Deploy Single Vault APP
 
 on:
   push:
