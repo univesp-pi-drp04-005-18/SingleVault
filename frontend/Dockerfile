@@ -1,13 +1,31 @@
-FROM node:16-alpine
+# FROM node:16-alpine
 
+# WORKDIR /app
+
+# COPY package*.json ./
+
+# RUN npm install
+
+# COPY . .
+
+# EXPOSE 3000
+
+# CMD ["npm", "start"]
+
+# Etapa 1: Build
+FROM node:16-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install
-
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "start"]
+# Etapa 2: Servir com NGINX
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
+

@@ -7,7 +7,7 @@
 
 //   const handleRegister = async () => {
 //     try {
-//       await axios.post('http://localhost:8083/users/register', {
+//       await axios.post('${process.env.REACT_APP_API_URL}/users/register', {
 //         username,
 //         password,
 //       });
@@ -54,7 +54,7 @@ const Register = ({ onSwitchView }) => {
     setError('');
     
     try {
-      await axios.post('http://localhost:8083/users/register', {
+      await axios.post('${process.env.REACT_APP_API_URL}/users/register', {
         username,
         password,
       });
