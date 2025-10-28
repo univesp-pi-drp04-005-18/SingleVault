@@ -185,7 +185,7 @@ const CredenciaisList = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8083/credentials', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/credentials', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -257,7 +257,7 @@ const CredenciaisList = () => {
         owner: localStorage.getItem('username') || '',
       };
 
-      const response = await fetch('http://localhost:8083/credentials', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/credentials', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -296,7 +296,7 @@ const CredenciaisList = () => {
         owner: localStorage.getItem('username') || '',
       };
 
-      const response = await fetch(`http://localhost:8083/credentials/${selectedCredential.name}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/credentials/${selectedCredential.name}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -331,7 +331,7 @@ const CredenciaisList = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8083/credentials/${selectedCredential.name}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/credentials/${selectedCredential.name}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -406,7 +406,7 @@ const CredenciaisList = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:8083/users/delete', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/users/delete', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -449,7 +449,7 @@ const CredenciaisList = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:8083/users/update', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/users/update', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
