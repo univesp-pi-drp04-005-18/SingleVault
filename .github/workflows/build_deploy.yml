@@ -62,7 +62,7 @@ jobs:
 
     - name: Build
       run: |
-        echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > .env
+        echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > ${BUILD_CONTEXT}/.env
         bash scripts/docker_build_push.sh
       
   
