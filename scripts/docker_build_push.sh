@@ -22,7 +22,7 @@ export ERROR_VAR=$?
 
 if [[ "$ERROR_VAR" == 0 ]]; then
     echo "$GITHUB_ACTOR iniciou a contrução da imagem docker $IMAGE_NAME:$IMAGE_TAG."
-    docker build -t "$IMAGE_NAME:$IMAGE_TAG" -f "$DOCKERFILE_PATH" 
+    docker build -t "$IMAGE_NAME:$IMAGE_TAG" -f "$DOCKERFILE_PATH" "$BUILD_CONTEXT"
     ERROR_VAR=$?
     if [[ "$ERROR_VAR" == 0 ]]; then
         echo "Pushing para Registro de Artefato"

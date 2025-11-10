@@ -29,6 +29,7 @@ jobs:
 
     env:
       DOCKERFILE_PATH: "./backend/Dockerfile"
+      BUILD_CONTEXT: "./backend"
       IMAGE_NAME: "svault-backend"
       IMAGE_TAG: "1.0.0"
 
@@ -45,6 +46,7 @@ jobs:
 
     env:
       DOCKERFILE_PATH: "./frontend/Dockerfile"
+      BUILD_CONTEXT: "./frontend"
       IMAGE_NAME: "svault-frontend"
       IMAGE_TAG: "1.0.0"
 
