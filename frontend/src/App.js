@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     const fetchCredentials = async () => {
       try {
-        const response = await axios.get(`/api/credentials`, {
+        const response = await axios.get('/api/credentials', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCredentials(response.data);
