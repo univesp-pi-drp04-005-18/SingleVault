@@ -37,8 +37,8 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    - name: Build
-      run: bash scripts/docker_build_push.sh
+    # - name: Build
+    #   run: bash scripts/docker_build_push.sh
 
   build-frontend:
 
@@ -54,5 +54,42 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    - name: Build
-      run: bash scripts/docker_build_push.sh   
+    #- name: Build
+      #run: bash scripts/docker_build_push.sh  
+      
+  
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SERVER_SSH: ${{ secrets.SERVER_SSH }}
+      SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
+      SERVER_IP: ${{ secrets.SERVER_IP }}
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Criar arquivo da chave SSH
+        run: |
+          echo "$SERVER_SSH" > univesp-pi.pem
+          chmod 600 univesp-pi.pem
+
+      - name: Copiar docker-compose.yml para o servidor
+        run: |
+          scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
+            ./docker-compose.yml \
+            $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/docker-compose.yml
+
+      - name: Conectar via SSH e subir containers
+        run: |
+          ssh -i univesp-pi.pem -o StrictHostKeyChecking=no $SERVER_SSH_USER@$SERVER_IP << 'EOF'
+            cd /home/univesp-pi
+
+            echo "==> Subindo containers com docker compose..."
+            docker compose pull || true
+            docker compose up -d --remove-orphans
+
+            echo "==> Containers em execução:"
+            docker ps
+          EOF
