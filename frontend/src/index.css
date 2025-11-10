@@ -1,7 +1,25 @@
 /* =========================
-   ESTILOS GLOBAIS
+   VARIÁVEIS DE TEMA
 ========================= */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --card-bg: #f9f9f9;
+  --border-color: #dddddd;
+  --hover-bg: #f0f0f0;
+}
 
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --card-bg: #1e1e1e;
+  --border-color: #2c2c2c;
+  --hover-bg: #2a2a2a;
+}
+
+/* =========================
+   RESET BÁSICO
+========================= */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,84 +32,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* =========================
-   VARIÁVEIS DE TEMA
-========================= */
-
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --card-bg: #ffffff;
-  --border-color: #ddd;
-  --sidebar-bg: #f4f4f4;
-  --hover-bg: #f0f0f0;
-}
-
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #f5f5f5;
-  --card-bg: #1e1e1e;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --sidebar-bg: #181818;
-  --hover-bg: rgba(255, 255, 255, 0.05);
-}
-
-/* =========================
-   SIDEBAR / MENU LATERAL
-========================= */
-
-.sidebar {
-  background-color: var(--sidebar-bg);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-right: 1px solid var(--border-color);
-}
-
-.sidebar input {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 8px 10px;
-  width: calc(100% - 20px);
-  margin: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sidebar input::placeholder {
-  color: #999;
-}
-
-.sidebar button {
-  background-color: #4a90e2;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: 500;
-  margin: 10px;
-  width: calc(100% - 20px);
-  transition: background-color 0.3s ease;
-}
-
-.sidebar button:hover {
-  background-color: #357abd;
-}
-
 /* =========================
    LISTA DE CREDENCIAIS
 ========================= */
-
 .credential-list {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .credential-item {
@@ -102,12 +48,7 @@ code {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--card-bg);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.credential-item:hover {
-  background-color: var(--hover-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .credential-name {
@@ -121,9 +62,21 @@ code {
 .credential-name i {
   margin-left: 10px;
   cursor: pointer;
-  color: var(--text-color);
+  font-size: 18px;
+  color: #007bff;
 }
 
+.credential-name i.lock {
+  color: #ff0000;
+}
+
+.credential-name i.unlock {
+  color: #00b300;
+}
+
+/* =========================
+   DETALHES
+========================= */
 .credential-details {
   display: flex;
   flex-direction: column;
@@ -132,29 +85,24 @@ code {
 
 .credential-details p {
   margin: 5px 0;
-  color: var(--text-color);
 }
 
 /* =========================
-   ÍCONES E BOTÕES
+   BOTÕES E ÍCONES
 ========================= */
-
 button {
   margin-left: 5px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-button i {
-  color: var(--text-color);
+  color: #007bff;
   font-size: 16px;
-  transition: color 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-/* =========================
-   CAMPOS ESCONDIDOS
-========================= */
+button:hover {
+  opacity: 0.8;
+}
 
 .hidden-value {
   display: inline-block;
@@ -167,25 +115,4 @@ button i {
 
 .revealed-value {
   word-wrap: break-word;
-}
-
-/* =========================
-   RESPONSIVIDADE
-========================= */
-
-@media (max-width: 768px) {
-  .credential-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .credential-name {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-
-  .sidebar input,
-  .sidebar button {
-    width: 90%;
-  }
 }
