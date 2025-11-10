@@ -116,3 +116,92 @@ button:hover {
 .revealed-value {
   word-wrap: break-word;
 }
+
+/* ========== OVERRIDES PARA MODO ESCURO (COBERTURA GERAL) ========== */
+
+/* Força cores do background / texto nas classes comuns do Bootstrap ou estilos pré-existentes */
+.list-group,
+.list-group-item,
+.panel,
+.panel-body,
+.well,
+.bg-white,
+.bg-light,
+.card,
+.sidebar,
+.credential-list {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Itens da lista (ex.: list-group-item) */
+.list-group-item,
+.credential-item,
+.credential-list li,
+.credential-list .credential-item {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Item ativo / selecionado (darker highlight, mas legível) */
+.list-group-item.active,
+.list-group-item.active:hover,
+.credential-list .active {
+  background-color: rgba(255,255,255,0.04) !important; /* sutil no dark */
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Inputs / search box na sidebar */
+.form-control,
+.sidebar input,
+input[type="text"],
+input[type="search"],
+textarea {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Placeholder legível no dark */
+::placeholder {
+  color: rgba(255,255,255,0.45) !important;
+}
+
+/* Ícones e botões na sidebar */
+.sidebar button,
+.list-group .btn,
+button {
+  color: var(--text-color) !important;
+}
+
+/* Elementos com classes utility que forçam fundo branco */
+.bg-white, .bg-light {
+  background-color: var(--card-bg) !important;
+}
+
+/* Se há elementos com sombra branca, neutralizar */
+.box, .panel-default {
+  background-color: var(--card-bg) !important;
+  box-shadow: none !important;
+}
+
+/* Se ainda houver textos muito claros sobre fundo claro, força contraste */
+.credential-name,
+.credential-details,
+.credential-item * {
+  color: var(--text-color) !important;
+}
+
+/* Pequena suavização no hover */
+.credential-item:hover,
+.list-group-item:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .sidebar, .list-group { background-color: var(--card-bg) !important; }
+}
