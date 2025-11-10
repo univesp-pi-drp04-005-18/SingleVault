@@ -41,8 +41,11 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    # - name: Build
-    #   run: bash scripts/docker_build_push.sh
+    - name: Build-Docker
+      run: bash scripts/docker_build_push.sh
+
+    - name: Docker-Scan
+      run: bash scripts/docker_scan.sh
 
   build-frontend:
 
@@ -60,10 +63,13 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    - name: Build
+    - name: Build-Docker
       run: |
         echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > ${BUILD_CONTEXT}/.env
         bash scripts/docker_build_push.sh
+    
+    - name: Docker-Scan
+      run: bash scripts/docker_scan.sh
       
   
   deploy:
