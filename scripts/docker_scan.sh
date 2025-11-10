@@ -16,7 +16,7 @@ export ERROR_VAR=$?
 
 if [[ "$ERROR_VAR" == 0 ]]; then
 
-    docker scan --accept-license --dependency-tree "$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG"
+    docker scout recommendations "$IMAGE_NAME:$IMAGE_TAG"
 fi
 
 echo "Finishing Test."
