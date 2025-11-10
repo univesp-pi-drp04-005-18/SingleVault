@@ -37,8 +37,8 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    # - name: Build
-    #   run: bash scripts/docker_build_push.sh
+    - name: Build
+      run: bash scripts/docker_build_push.sh
 
   build-frontend:
 
@@ -54,8 +54,8 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
-    #- name: Build
-      #run: bash scripts/docker_build_push.sh  
+    - name: Build
+      run: bash scripts/docker_build_push.sh  
       
   
   deploy:
