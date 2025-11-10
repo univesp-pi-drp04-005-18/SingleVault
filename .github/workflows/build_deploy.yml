@@ -43,6 +43,7 @@ jobs:
   build-frontend:
 
     runs-on: ubuntu-latest
+    needs: [build-backend]
 
     env:
       DOCKERFILE_PATH: "./frontend/Dockerfile"
@@ -60,6 +61,7 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
 
     env:
       SERVER_SSH: ${{ secrets.SERVER_SSH }}
