@@ -19,6 +19,10 @@ env:
   DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}  
   REPOSITORY: "jozneto"
 
+  SERVER_SSH: ${{ secrets.SERVER_SSH }}
+  SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
+  SERVER_IP: ${{ secrets.SERVER_IP }}
+
 
 
 jobs:
@@ -50,23 +54,21 @@ jobs:
       BUILD_CONTEXT: "./frontend"
       IMAGE_NAME: "svault-frontend"
       IMAGE_TAG: "1.0.0"
+      REACT_APP_API_URL: http://${SERVER_IP}:8000
 
     steps:
     - name: Checkout do repositório
       uses: actions/checkout@v3
 
     - name: Build
-      run: bash scripts/docker_build_push.sh  
+      run: |
+        echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > .env
+        bash scripts/docker_build_push.sh
       
   
   deploy:
     runs-on: ubuntu-latest
     needs: [build-backend, build-frontend]
-
-    env:
-      SERVER_SSH: ${{ secrets.SERVER_SSH }}
-      SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
-      SERVER_IP: ${{ secrets.SERVER_IP }}
 
     steps:
       - name: Checkout código
