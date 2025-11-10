@@ -54,7 +54,7 @@ const Register = ({ onSwitchView }) => {
     setError('');
     
     try {
-      await axios.post('${process.env.REACT_APP_API_URL}/users/register', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {
         username,
         password,
       });
