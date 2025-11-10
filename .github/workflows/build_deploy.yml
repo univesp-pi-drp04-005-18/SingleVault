@@ -75,6 +75,19 @@ jobs:
           echo "$SERVER_SSH" > univesp-pi.pem
           chmod 600 univesp-pi.pem
 
+      - name: Enviar arquivo .env para o servidor
+        run: |
+          cat > .env << EOT
+          APP_SECRET_KEY=${APP_SECRET_KEY}
+          MONGODB_USER=${MONGODB_USER}
+          MONGODB_PASS=${MONGODB_PASS}
+          MONGODB_HOST=${MONGODB_HOST}
+          EOT
+          scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
+          .env \
+          $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/.env
+
+
       - name: Copiar docker-compose.yml para o servidor
         run: |
           scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
