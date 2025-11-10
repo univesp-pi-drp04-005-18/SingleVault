@@ -44,75 +44,80 @@ jobs:
     - name: Build-Docker
       run: bash scripts/docker_build_push.sh
 
-    - name: Docker-Scan
-      run: bash scripts/docker_scan.sh
+    - name: Run Docker Scout scan
+      uses: docker/scout-action@v1
+      with:
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        command: cves
+        only-fixed: true
+        exit-code: true 
 
-  build-frontend:
+  # build-frontend:
 
-    runs-on: ubuntu-latest
-    needs: [build-backend]
+  #   runs-on: ubuntu-latest
+  #   needs: [build-backend]
 
-    env:
-      DOCKERFILE_PATH: "./frontend/Dockerfile"
-      BUILD_CONTEXT: "./frontend"
-      IMAGE_NAME: "svault-frontend"
-      IMAGE_TAG: "1.0.1"
-      REACT_APP_API_URL: http://${SERVER_IP}:8000
+  #   env:
+  #     DOCKERFILE_PATH: "./frontend/Dockerfile"
+  #     BUILD_CONTEXT: "./frontend"
+  #     IMAGE_NAME: "svault-frontend"
+  #     IMAGE_TAG: "1.0.1"
+  #     REACT_APP_API_URL: http://${SERVER_IP}:8000
 
-    steps:
-    - name: Checkout do repositório
-      uses: actions/checkout@v3
+  #   steps:
+  #   - name: Checkout do repositório
+  #     uses: actions/checkout@v3
 
-    - name: Build-Docker
-      run: |
-        echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > ${BUILD_CONTEXT}/.env
-        bash scripts/docker_build_push.sh
+  #   - name: Build-Docker
+  #     run: |
+  #       echo "REACT_APP_API_URL=http://${SERVER_IP}:8000" > ${BUILD_CONTEXT}/.env
+  #       bash scripts/docker_build_push.sh
     
-    - name: Docker-Scan
-      run: bash scripts/docker_scan.sh
+  #   - name: Docker-Scan
+  #     run: bash scripts/docker_scan.sh
       
   
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build-backend, build-frontend]
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: [build-backend, build-frontend]
 
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout código
+  #       uses: actions/checkout@v4
 
-      - name: Criar arquivo da chave SSH
-        run: |
-          echo "$SERVER_SSH" > univesp-pi.pem
-          chmod 600 univesp-pi.pem
+  #     - name: Criar arquivo da chave SSH
+  #       run: |
+  #         echo "$SERVER_SSH" > univesp-pi.pem
+  #         chmod 600 univesp-pi.pem
 
-      - name: Enviar arquivo .env para o servidor
-        run: |
-          cat > .env << EOT
-          APP_SECRET_KEY=${APP_SECRET_KEY}
-          MONGODB_USER=${MONGODB_USER}
-          MONGODB_PASS=${MONGODB_PASS}
-          MONGODB_HOST=${MONGODB_HOST}
-          EOT
-          scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
-          .env \
-          $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/.env
+  #     - name: Enviar arquivo .env para o servidor
+  #       run: |
+  #         cat > .env << EOT
+  #         APP_SECRET_KEY=${APP_SECRET_KEY}
+  #         MONGODB_USER=${MONGODB_USER}
+  #         MONGODB_PASS=${MONGODB_PASS}
+  #         MONGODB_HOST=${MONGODB_HOST}
+  #         EOT
+  #         scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
+  #         .env \
+  #         $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/.env
 
 
-      - name: Copiar docker-compose.yml para o servidor
-        run: |
-          scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
-            ./docker-compose.yml \
-            $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/docker-compose.yml
+  #     - name: Copiar docker-compose.yml para o servidor
+  #       run: |
+  #         scp -i univesp-pi.pem -o StrictHostKeyChecking=no \
+  #           ./docker-compose.yml \
+  #           $SERVER_SSH_USER@$SERVER_IP:/home/univesp-pi/docker-compose.yml
 
-      - name: Conectar via SSH e subir containers
-        run: |
-          ssh -i univesp-pi.pem -o StrictHostKeyChecking=no $SERVER_SSH_USER@$SERVER_IP << 'EOF'
-            cd /home/univesp-pi
+  #     - name: Conectar via SSH e subir containers
+  #       run: |
+  #         ssh -i univesp-pi.pem -o StrictHostKeyChecking=no $SERVER_SSH_USER@$SERVER_IP << 'EOF'
+  #           cd /home/univesp-pi
 
-            echo "==> Subindo containers com docker compose..."
-            docker compose pull || true
-            docker compose up -d --remove-orphans
+  #           echo "==> Subindo containers com docker compose..."
+  #           docker compose pull || true
+  #           docker compose up -d --remove-orphans
 
-            echo "==> Containers em execução:"
-            docker ps
-          EOF
+  #           echo "==> Containers em execução:"
+  #           docker ps
+  #         EOF
