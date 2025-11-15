@@ -206,4 +206,49 @@ button {
   .sidebar, .list-group { background-color: var(--card-bg) !important; }
 }
 
+/* =========================
+   MELHORIAS PARA A ÁREA LOGADA
+========================= */
 
+/* Garantir que todos os inputs usem o tema */
+input, textarea, select {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Placeholder com cor adequada */
+::placeholder {
+  color: var(--text-color) !important;
+  opacity: 0.6 !important;
+}
+
+/* Modais e overlays */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-content {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Scrollbars temáticas */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color);
+  opacity: 0.5;
+}
