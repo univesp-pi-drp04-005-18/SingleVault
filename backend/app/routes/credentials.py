@@ -9,7 +9,7 @@ router = APIRouter()
 def create_credential(credential: Credential, current_user: str = Depends(get_current_user)):
     """Cria uma credencial associada ao usuário logado."""
     credential.owner = current_user
-    credential.encrypt_fields()  # Supondo que você tenha um método para encriptar campos sensíveis
+    credential.encrypt_fields()  
     creds_collection.insert_one(credential.dict())
     return {"message": "Credencial salva com sucesso!"}
 
@@ -19,7 +19,7 @@ def list_credentials(current_user: str = Depends(get_current_user)):
     credentials = list(creds_collection.find({"owner": current_user}, {"_id": 0}))
     for cred in credentials:
         cred_obj = Credential(**cred)
-        cred_obj.decrypt_fields()  # Supondo que você tenha um método para descriptografar os campos
+        cred_obj.decrypt_fields() 
         cred.update(cred_obj.dict())
     return credentials
 
