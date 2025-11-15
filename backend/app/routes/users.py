@@ -38,38 +38,6 @@ def get_profile(current_user: str = Depends(get_current_user)):
     user_data.pop("password", None)
     return user_data
 
-# @router.put("/update")
-# def update_user(update: UserUpdate, current_user: str = Depends(get_current_user)):
-#     """Atualiza o nome de usuário e/ou senha do usuário autenticado."""
-#     user_data = users_collection.find_one({"username": current_user})
-#     if not user_data:
-#         raise HTTPException(status_code=404, detail="Usuário não encontrado")
-
-#     update_data = {}
-
-#     if update.username:
-#         if users_collection.find_one({"username": update.username}):
-#             raise HTTPException(status_code=400, detail="Novo nome de usuário já está em uso")
-#         update_data["username"] = update.username
-
-#     if update.password:
-#         update_data["password"] = hash_password(update.password)
-
-#     if not update_data:
-#         raise HTTPException(status_code=400, detail="Nenhuma alteração fornecida")
-
-#     users_collection.update_one({"username": current_user}, {"$set": update_data})
-#     return {"message": "Usuário atualizado com sucesso"}
-
-# @router.delete("/delete")
-# def delete_user(current_user: str = Depends(get_current_user)):
-#     """Remove o usuário autenticado do sistema."""
-#     result = users_collection.delete_one({"username": current_user})
-#     if result.deleted_count == 0:
-#         raise HTTPException(status_code=404, detail="Usuário não encontrado")
-    
-#     return {"message": "Usuário removido com sucesso"}
-
 
 @router.put("/update")
 async def update_user(

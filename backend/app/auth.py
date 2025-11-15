@@ -6,7 +6,6 @@ from fastapi import Depends, HTTPException, Security
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 
-#SECRET_KEY = os.getenv("APP_SECRET_KEY", "supersecretkey")
 SECRET_KEY = os.getenv("APP_SECRET_KEY")
 ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
