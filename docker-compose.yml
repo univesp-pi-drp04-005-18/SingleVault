@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: jozneto/svault-backend:1.0.0
+    image: jozneto/vault-backend:1.0.0
     ports:
       - "8000:8000"
     env_file:
@@ -15,7 +15,7 @@ services:
       - MONGODB_URI=mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_HOST}
 
   frontend:
-    image: jozneto/svault-frontend:1.0.1
+    image: jozneto/vault-frontend:1.0.0
     ports:
       - "3000:80"
 

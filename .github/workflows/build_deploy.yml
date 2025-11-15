@@ -34,7 +34,7 @@ jobs:
     env:
       DOCKERFILE_PATH: "./backend/Dockerfile"
       BUILD_CONTEXT: "./backend"
-      IMAGE_NAME: "svault-backend"
+      IMAGE_NAME: "vault-backend"
       IMAGE_TAG: "1.0.0"
 
     steps:
@@ -55,7 +55,7 @@ jobs:
     env:
       DOCKERFILE_PATH: "./frontend/Dockerfile"
       BUILD_CONTEXT: "./frontend"
-      IMAGE_NAME: "svault-frontend"
+      IMAGE_NAME: "vault-frontend"
       IMAGE_TAG: "1.0.1"
       REACT_APP_API_URL: http://${SERVER_IP}:8000
 
