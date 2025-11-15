@@ -3,7 +3,7 @@ from routes import users, credentials
 from fastapi.middleware.cors import CORSMiddleware
 
 # Criando a instância do FastAPI
-app = FastAPI(title='Password Manager')
+app = FastAPI(title='Single Vault')
 
 # Adicionando suporte ao CORS
 app.add_middleware(
