@@ -56,7 +56,7 @@ jobs:
       DOCKERFILE_PATH: "./frontend/Dockerfile"
       BUILD_CONTEXT: "./frontend"
       IMAGE_NAME: "vault-frontend"
-      IMAGE_TAG: "1.0.1"
+      IMAGE_TAG: "1.0.0"
       REACT_APP_API_URL: http://${SERVER_IP}:8000
 
     steps:
