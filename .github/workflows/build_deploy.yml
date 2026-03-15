@@ -6,7 +6,7 @@ on:
       acao:
         description: 'Selecione a ação que deseja executar'
         required: true
-        default: 'build-backend'
+        default: 'Escolha uma ação!'
         type: choice
         options:
           - build-backend
