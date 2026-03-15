@@ -20,6 +20,6 @@ services:
       - "3000:80"
 
     environment:
-      - REACT_APP_API_URL=http://http://134.65.236.207:8000
+      - REACT_APP_API_URL=http://134.65.236.207:8000
     depends_on:
       - backend
